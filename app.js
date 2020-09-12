@@ -4,7 +4,6 @@ const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const passport = require('./config/passport')
-// const session = require('express-session')
 
 const app = express()
 const PORT = process.env.PORT || 3000
@@ -14,7 +13,6 @@ app.set('view engine', 'handlebars')
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-// app.use(session({ secret: process.env.SECRET, resave: false, saveUninitialized: false }))
 
 app.listen(PORT, () => console.log(`tripday is listening on port:${PORT}`))
 

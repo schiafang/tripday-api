@@ -5,11 +5,11 @@ const jwt = require('jsonwebtoken')
 
 const userController = {
   signUp: (req, res) => {
-    const { name, email, password, confirmPassword, realname } = req.body
+    const { email, password, confirmPassword } = req.body
     const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
     const error = []
 
-    if (!name || !email || !password || !confirmPassword) {
+    if (!email || !password || !confirmPassword) {
       error.push({ message: 'All fields are required' })
       return res.json({ status: 'error', message: error })
     }
@@ -26,7 +26,7 @@ const userController = {
           return res.json({ status: 'error', message: error })
         }
         if (!user) {
-          return User.create({ name, email, password: hashPassword, realname })
+          return User.create({ email, password: hashPassword })
             .then(() => res.json({ status: 'success', message: 'Registered successfully' }))
         }
       })
@@ -40,7 +40,7 @@ const userController = {
 
     User.findOne({ where: { email } })
       .then(user => {
-        const { id, name, email, isAdmin } = user
+        const { id, name, email, isAdmin, realname } = user
         if (!user) return res.status(401).json({ status: 'error', message: 'This email is not registered' })
         if (!bcrypt.compareSync(password, user.password)) {
           return res.status(401).json({ status: 'error', message: 'Password incorrect' })
