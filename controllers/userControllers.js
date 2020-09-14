@@ -53,6 +53,11 @@ const userController = {
           user: { id, name, realname, email, isAdmin }
         })
       })
+  },
+  getCurrentUser: (req, res) => {
+    console.log(req.user)
+    // const { id, name, email, avatar, isAdmin } = req.user
+    // return res.json({ id, name, email, avatar, isAdmin })
   }
 }
 
