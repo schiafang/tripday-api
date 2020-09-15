@@ -3,7 +3,6 @@ if (process.env.NODE_ENV !== 'production') { require('dotenv').config() }
 const express = require('express')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
-const passport = require('./config/passport')
 const cors = require('cors')
 
 const app = express()
@@ -17,5 +16,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.listen(PORT, () => console.log(`tripday is listening on port:${PORT}`))
+
+const passport = require('./config/passport')
 
 require('./routes')(app, passport)

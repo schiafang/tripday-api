@@ -6,9 +6,10 @@ const passportJWT = require('passport-jwt')
 const ExtractJwt = passportJWT.ExtractJwt
 const JwtStrategy = passportJWT.Strategy
 
-let jwtOptions = {}
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken()
-jwtOptions.secretOrKey = process.env.JWT_SECRET
+let jwtOptions = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET
+}
 
 passport.use(new JwtStrategy(jwtOptions, function (jwt_payload, next) {
   User.findByPk(jwt_payload.id).then(user => {
@@ -18,4 +19,3 @@ passport.use(new JwtStrategy(jwtOptions, function (jwt_payload, next) {
 }))
 
 module.exports = passport
-

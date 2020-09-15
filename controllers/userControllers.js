@@ -47,7 +47,7 @@ const userController = {
         }
 
         const payload = { id }
-        const token = jwt.sign(payload, process.env.TOKEN_KEY)
+        const token = jwt.sign(payload, process.env.JWT_SECRET)
         return res.json({
           status: 'success', message: 'Authorization succeeded', token: token,
           user: { id, name, realname, email, isAdmin }
@@ -55,9 +55,8 @@ const userController = {
       })
   },
   getCurrentUser: (req, res) => {
-    console.log(req.user)
-    // const { id, name, email, avatar, isAdmin } = req.user
-    // return res.json({ id, name, email, avatar, isAdmin })
+    const { id, name, email, avatar, isAdmin, realname } = req.user
+    return res.json({ id, name, email, realname, avatar, isAdmin })
   }
 }
 
