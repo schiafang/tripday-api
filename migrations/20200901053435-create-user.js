@@ -21,7 +21,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       tel: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
+      },
+      avatar: {
+        type: Sequelize.STRING
       },
       isAdmin: {
         type: Sequelize.BOOLEAN,

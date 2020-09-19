@@ -1,4 +1,6 @@
 const userController = require('../controllers/userControllers')
+const multer = require('multer')
+var upload = multer({ dest: 'temp/' })
 
 module.exports = (app, passport) => {
 
@@ -16,4 +18,6 @@ module.exports = (app, passport) => {
 
   app.post('/api/signup', userController.signUp)
   app.post('/api/signin', userController.signIn)
+
+  app.put('/api/user', authenticated, upload.single('avatar'), userController.putUser)
 }
